@@ -134,7 +134,7 @@ class TocMachine(GraphMachine):
             else:
                 pos1 = "0%"
 
-        str_arr = str_arr +"凌晨 " + pos+"C 降雨機率 "+pos1+"\n\n資料來源:weather.com"
+        str_arr = str_arr +"凌晨 " + pos+"C 降雨機率 "+pos1+"\n\n更多詳細資料:weather.com"
 
         reply_arr.append(TextSendMessage(str_arr))
         reply_arr.append(canmessage)
