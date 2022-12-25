@@ -1,12 +1,13 @@
 from transitions.extensions import GraphMachine
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, MessageTemplateAction, ImageSendMessage
-from utils import send_text_message, send_message,send_image_url
+from utils import send_text_message, send_message
 import requests
 canmessage = TemplateSendMessage(
                                 alt_text ='Buttons template',
                                 template = ButtonsTemplate(
+                                    # thumbnail_image_url='https://1.bp.blogspot.com/-cM_JOEo9Q5E/X-x1jogQw8I/AAAAAAAALDA/VsbwTKQ2U6o8Da0wPv2vnyt9jBxWhlQmQCNcBGAsYHQ/s647/gaitubao_KU%2Bbasic_jpg1.jpg',
                                     title = '請問需要什麼服務?',
-                                    text = '',
+                                    text = 'Hello',
                                     actions=[
                                         MessageTemplateAction(
                                             label = '今日各地天氣預報',
@@ -16,11 +17,11 @@ canmessage = TemplateSendMessage(
                                             label = '今日各地空氣品質',
                                             text = '今日各地空氣品質'
                                         ),
-                                        MessageTemplateAction(  #fsm
+                                        MessageTemplateAction(
                                             label = 'FSM',
                                             text = 'FSM'
                                         ),
-                                        MessageTemplateAction(  #website
+                                        MessageTemplateAction(
                                             label = 'Websites',
                                             text = 'Websites'
                                         )
@@ -28,11 +29,37 @@ canmessage = TemplateSendMessage(
                                     ]
                                 )
                             )
+# canmessage1 = TemplateSendMessage(
+#                                 alt_text ='Buttons template',
+#                                 template = ButtonsTemplate(
+#                                     thumbnail_image_url='https://1.bp.blogspot.com/-cM_JOEo9Q5E/X-x1jogQw8I/AAAAAAAALDA/VsbwTKQ2U6o8Da0wPv2vnyt9jBxWhlQmQCNcBGAsYHQ/s647/gaitubao_KU%2Bbasic_jpg1.jpg',
+#                                     title = '這一頁還沒開發完成，在此獻上最高的歉意。',
+#                                     text = '如需返回上一頁請按返回鍵或輸入"返回"',
+#                                     actions=[
+#                                         MessageTemplateAction(
+#                                             label = '對不起',
+#                                             text = '對不起'
+#                                         ),
+#                                         MessageTemplateAction(
+#                                             label = '這一頁還沒開發完成喔',
+#                                             text = '這一頁還沒開發完成喔'
+#                                         ),
+#                                         MessageTemplateAction(
+#                                             label = '網站表',
+#                                             text = '網站表'
+#                                         ),
+#                                         MessageTemplateAction(
+#                                             label = '返回',
+#                                             text = '返回'
+#                                         )
+                                        
+#                                     ]
+#                                 )
+#                             )
+keyword = ["牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座", "摩羯座", "水瓶座", "雙魚座", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 
 keywordc = ["台北市", "新北市", "桃園縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "雲林縣", "嘉義縣", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "宜蘭縣", "基隆市", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
 urlc = ["https://weather.com/zh-TW/weather/today/l/fe7393b7f2c8eed2cf692bd079361df362d9f0c1c0f896e6e46a649295e15c7d", "https://weather.com/zh-TW/weather/today/l/202fab9acca1bbb5edc387b8e8da03beeb7bcef4b4744f237fad2b5ed06ccc9b", "https://weather.com/zh-TW/weather/today/l/2063dc93d721d794396441c2473f2d3e6e5b335903034198829e1e86eb9e83e0", "https://weather.com/zh-TW/weather/today/l/7ceb69e37a100e138b92e592f2bd6619cfa4626f7315d0877b5061494e83bb77", "https://weather.com/zh-TW/weather/today/l/98898840824a2ce5e45198b2a770ac6e8f106f7f5da8d4188342d9a0eb7b4646", "https://weather.com/zh-TW/weather/today/l/dd5ff859897b2c4c4e6685a991f36c262d87df06e83cacbdcc661952cf42f76c", "https://weather.com/zh-TW/weather/today/l/5ab68825e5707d9ae97fff0ce6a466143da423d852b96cacfe685321841852c7", "https://weather.com/zh-TW/weather/today/l/d19a8ded0b14929d05697c400dcfb0fb3e183af6d272d7b3e7c9bffce9ec56b6", "https://weather.com/zh-TW/weather/today/l/10aef81155ecc24e4e5921212f57b57370388c49b9bfe22d4cdf68463ff6b497", "https://weather.com/zh-TW/weather/today/l/428a16ac8864a5387146aa0d8046b67fe787856453e5d97fd86a84b287678ba4", "https://weather.com/zh-TW/weather/today/l/ab6a0d440cf29997c96b86e11b647c285d3a489a623ea04d29fdefe0ea3534b2", "https://weather.com/zh-TW/weather/today/l/0f2fe653d8fc4305e214c9ee0d128f10f8db0658565e7ddd456b5c1ab9bb8dad", "https://weather.com/zh-TW/weather/today/l/00929a4113c22c58c9313b19844bbb6b2df815f80eb2cb96128e68933a503284", "https://weather.com/zh-TW/weather/today/l/55e9e1bcfd283aaa0e2456699b82ef892359d560f1ec47a38a3eeba59ef15b5b", "https://weather.com/zh-TW/weather/today/l/5206d5e441522dd7e4aa1e4197038aae536b860e1e8e8235e2e66cb2f9434128", "https://weather.com/zh-TW/weather/today/l/047be26b6fbb01ad1ce1353c8a1586474caf4949b1d53a4898d598c52954ad72"]
-# url_air = ["https://weather.com/zh-TW/weather/today/l/fe7393b7f2c8eed2cf692bd079361df362d9f0c1c0f896e6e46a649295e15c7d", "https://weather.com/zh-TW/weather/today/l/202fab9acca1bbb5edc387b8e8da03beeb7bcef4b4744f237fad2b5ed06ccc9b", "https://weather.com/zh-TW/weather/today/l/2063dc93d721d794396441c2473f2d3e6e5b335903034198829e1e86eb9e83e0", "https://weather.com/zh-TW/weather/today/l/7ceb69e37a100e138b92e592f2bd6619cfa4626f7315d0877b5061494e83bb77", "https://weather.com/zh-TW/weather/today/l/98898840824a2ce5e45198b2a770ac6e8f106f7f5da8d4188342d9a0eb7b4646", "https://weather.com/zh-TW/weather/today/l/dd5ff859897b2c4c4e6685a991f36c262d87df06e83cacbdcc661952cf42f76c", "https://weather.com/zh-TW/weather/today/l/5ab68825e5707d9ae97fff0ce6a466143da423d852b96cacfe685321841852c7", "https://weather.com/zh-TW/weather/today/l/d19a8ded0b14929d05697c400dcfb0fb3e183af6d272d7b3e7c9bffce9ec56b6", "https://weather.com/zh-TW/weather/today/l/10aef81155ecc24e4e5921212f57b57370388c49b9bfe22d4cdf68463ff6b497", "https://weather.com/zh-TW/weather/today/l/428a16ac8864a5387146aa0d8046b67fe787856453e5d97fd86a84b287678ba4", "https://weather.com/zh-TW/weather/today/l/ab6a0d440cf29997c96b86e11b647c285d3a489a623ea04d29fdefe0ea3534b2", "https://weather.com/zh-TW/weather/today/l/0f2fe653d8fc4305e214c9ee0d128f10f8db0658565e7ddd456b5c1ab9bb8dad", "https://weather.com/zh-TW/weather/today/l/00929a4113c22c58c9313b19844bbb6b2df815f80eb2cb96128e68933a503284", "https://weather.com/zh-TW/weather/today/l/55e9e1bcfd283aaa0e2456699b82ef892359d560f1ec47a38a3eeba59ef15b5b", "https://weather.com/zh-TW/weather/today/l/5206d5e441522dd7e4aa1e4197038aae536b860e1e8e8235e2e66cb2f9434128", "https://weather.com/zh-TW/weather/today/l/047be26b6fbb01ad1ce1353c8a1586474caf4949b1d53a4898d598c52954ad72"]
-
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
@@ -134,7 +161,7 @@ class TocMachine(GraphMachine):
             else:
                 pos1 = "0%"
 
-        str_arr = str_arr +"凌晨 " + pos+"C 降雨機率 "+pos1+"\n\n更多詳細資料:weather.com"
+        str_arr = str_arr +"凌晨 " + pos+"C 降雨機率 "+pos1+"\n\n資料來源:weather.com"
 
         reply_arr.append(TextSendMessage(str_arr))
         reply_arr.append(canmessage)
@@ -143,7 +170,7 @@ class TocMachine(GraphMachine):
         self.go_back()
     #####天氣#####
 
-    #####air#####
+ #####air#####
     def is_going_to_air(self, event):
         text = event.message.text
         return text.lower() == "今日各地空氣品質"
@@ -160,6 +187,7 @@ class TocMachine(GraphMachine):
     def on_enter_air2(self, event):
         print("I'm entering air2")
         reply_token = event.reply_token
+        print(reply_token)
         i =0
         if(len(event.message.text) == 3):
             for key in keywordc:
@@ -197,13 +225,15 @@ class TocMachine(GraphMachine):
 
         reply_arr.append(TextSendMessage(str_arr))
         reply_arr.append(canmessage)
-
+        print('test1')
         send_message(reply_token , reply_arr)
+        print('test2')
         self.go_back()
 
     #####air#####
 
-    #####FSM#####
+
+    #####FSM圖#####
     def is_going_to_showfsm(self, event):
         text = event.message.text
         return text.lower() == "fsm"
@@ -217,8 +247,7 @@ class TocMachine(GraphMachine):
         reply_arr.append(canmessage)
         send_message(reply_token, reply_arr)
         self.go_back()
-    #####FSM#####
-
+    #####FSM圖#####
 
     #####Website list#####
     def is_going_to_website(self, event):
@@ -238,4 +267,3 @@ class TocMachine(GraphMachine):
         send_message(reply_token, reply_arr)
         self.go_back()
     #####Website list#####
-        
